@@ -1,0 +1,56 @@
+package kodlama.io.Devs.dataAccess.concretes;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import kodlama.io.Devs.dataAccess.abstracts.LanguageRepository;
+import kodlama.io.Devs.entities.concretes.Language;
+
+public class InMemoryLanguageRepository implements LanguageRepository {
+	List<Language> languages;
+
+	@Override
+	public List<Language> list() {
+		languages = new ArrayList<Language>();
+		languages.add(new Language(1, "C# Camp","C#"));
+		languages.add(new Language(2, "JAVA Camp", "JAVA"));
+		languages.add(new Language(3, "Python Camp","Python"));
+
+
+
+		return null;
+	}
+
+	@Override
+	public void add(Language language) {
+		System.out.println("Eklendi");
+
+	}
+
+
+	@Override
+	public void getList(Language language) {
+		System.out.println("Listelendi");
+		
+		
+	}
+
+	@Override
+	public int getWithId(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void remove(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void uptade(Language language, int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

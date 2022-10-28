@@ -1,0 +1,57 @@
+package kodlama.io.Devs.business.concretes;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import kodlama.io.Devs.business.abstracts.LanguageService;
+import kodlama.io.Devs.dataAccess.abstracts.LanguageRepository;
+import kodlama.io.Devs.entities.concretes.Language;
+
+@Service
+public class LanguagesManager implements LanguageService {
+
+	private LanguageRepository languageRepository;
+
+	public LanguagesManager(LanguageRepository languageRepository) {
+		this.languageRepository = languageRepository;
+	}
+
+	ArrayList<Language> languagesNames = new ArrayList<>();
+
+	@Override
+	public List<Language> list() {
+
+		return languageRepository.list();
+	}
+
+	@Override
+	public void add(Language language) throws Exception {
+
+	}
+
+	@Override
+	public void getList(Language language) {
+
+	}
+
+	@Override
+	public void remove(int id) {
+		
+
+	}
+
+	@Override
+	public void uptade(Language language, int id) {
+		
+
+	}
+
+	@Override
+	public int getWithId(int id) {
+		
+		return languageRepository.getWithId(id);
+	}
+
+}
