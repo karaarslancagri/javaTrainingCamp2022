@@ -1,0 +1,16 @@
+package kodlama.io.Devs.business.abstracts;
+
+import java.util.List;
+
+import kodlama.io.Devs.entities.concretes.Language;
+
+public interface LanguageService {
+	 List<Language> list();
+     Language add(Language language) throws Exception;
+     void delete(int id);
+	 void uptade(Language language, int id);	
+	 Language getWithId(int id);
+	 boolean IsNameBlankAndEmpty(Language language);
+	 boolean IsNameExist(Language language);
+
+}

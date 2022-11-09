@@ -1,0 +1,38 @@
+package kodlama.io.Devs.business.concretes;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kodlama.io.Devs.business.abstracts.SubTechnologyService;
+import kodlama.io.Devs.business.responses.subTechnology.GetAllSubTechnologiesResponse;
+import kodlama.io.Devs.dataAccess.abstracts.LanguageRepository;
+import kodlama.io.Devs.dataAccess.abstracts.SubTechnologyRepository;
+import kodlama.io.Devs.entities.concretes.SubTechnology;
+@Service
+public class SubTechnologyManager implements SubTechnologyService{
+	
+	private SubTechnologyRepository subTechnologyRepository;
+	private LanguageRepository languageRepository;
+	
+	@Autowired
+	public SubTechnologyManager(SubTechnologyRepository subTechnologyRepository,LanguageRepository languageRepository) {
+		this.subTechnologyRepository=subTechnologyRepository;
+		this.languageRepository=languageRepository;
+	}
+
+	
+	public List<GetAllSubTechnologiesResponse> getAll(){
+		
+		List<SubTechnology> subTechnologies = subTechnologyRepository.findAll();
+		List<GetAllSubTechnologiesResponse> subTechnologyResponses=new ArrayList<GetAllSubTechnologiesResponse>();
+		
+		for(SubTechnology subTechnology : subTechnologies) {
+			GetAllSubTechnologiesResponse responseItem = new GetAllSubTechnologiesResponse();
+			responseItem.setSubTechnologyName(subTechnology.getSubTechnologyName());
+			
+		}
+	}
+}

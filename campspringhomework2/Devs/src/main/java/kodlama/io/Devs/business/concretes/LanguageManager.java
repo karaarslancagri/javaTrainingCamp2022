@@ -1,0 +1,106 @@
+package kodlama.io.Devs.business.concretes;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kodlama.io.Devs.business.abstracts.LanguageService;
+import kodlama.io.Devs.business.requests.language.CreateLanguageRequest;
+import kodlama.io.Devs.business.requests.language.DeleteLanguageRequest;
+import kodlama.io.Devs.business.requests.language.UptadeLanguageRequest;
+import kodlama.io.Devs.business.responses.languages.GetAllLanguagesResponse;
+import kodlama.io.Devs.business.responses.languages.GetByIdLanguageResponse;
+import kodlama.io.Devs.dataAccess.abstracts.LanguageRepository;
+import kodlama.io.Devs.entities.concretes.Language;
+
+
+
+@Service
+public class LanguageManager implements LanguageService {
+
+	private LanguageRepository languageRepository;
+	
+	@Autowired
+	public LanguageManager(LanguageRepository languageRepository) {
+		this.languageRepository = languageRepository;
+	}
+
+	@Override
+	public List<GetAllLanguagesResponse> getAll() {
+		
+		List<Language> languages = languageRepository.findAll();
+		List<GetAllLanguagesResponse> getAllLanguagesResponses = new ArrayList<GetAllLanguagesResponse>();
+		
+		for (Language language : languages) {
+			GetAllLanguagesResponse languagesResponse = new GetAllLanguagesResponse();
+			
+			languagesResponse.setLanguageId(language.getId());
+			languagesResponse.setLanguageName(language.getName());		
+			
+			getAllLanguagesResponses.add(languagesResponse);
+			
+		}
+		
+		return getAllLanguagesResponses;
+	}
+
+	@Override
+	public void add(CreateLanguageRequest createLanguageRequest) throws Exception {
+		
+		Language language = new Language();
+		
+		for(@SuppressWarnings("unused") Language languages : this.languageRepository.findAll()) {
+			if(createLanguageRequest.getLanguageName().equals(language.getName())){
+			    throw new Exception("Program ismi mevcut!");
+			
+		    } if (createLanguageRequest.getLanguageName() == null) {
+			    throw new Exception("Program ismi boş bırakılamaz!");
+			
+		    }else {
+			    language.setName(createLanguageRequest.getLanguageName());
+			    languageRepository.save(language);
+		    }	
+		}
+	
+	}
+
+	@Override
+	public void delete(DeleteLanguageRequest deleteLanguageRequest, int id) {
+		
+		Language language = languageRepository.findById(id).get();
+		language.setId(deleteLanguageRequest.getLanguageId());
+		languageRepository.delete(language);
+		
+		
+	}
+
+	@Override
+	public void uptade(UptadeLanguageRequest uptadeLanguageRequest, int id) throws Exception {
+		
+		Language language = languageRepository.findById(id).get();
+		language.setName(uptadeLanguageRequest.getLanguageName());
+		
+		System.out.println("güncellendi");
+		
+		
+	}
+
+
+	@Override
+	public GetByIdLanguageResponse getById(int id) {
+		
+		Language Language = languageRepository.findById(id).get();
+		GetByIdLanguageResponse getByIdLanguagesResponse = new GetByIdLanguageResponse();
+		getByIdLanguagesResponse.setLanguageName(Language.getName());
+		
+		return getByIdLanguagesResponse;
+	}
+
+	
+	
+	
+    
+
+}

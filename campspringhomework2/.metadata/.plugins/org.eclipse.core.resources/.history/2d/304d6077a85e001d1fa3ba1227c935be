@@ -1,0 +1,86 @@
+package kodlama.io.Devs.business.concretes;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import kodlama.io.Devs.business.abstracts.LanguageService;
+import kodlama.io.Devs.business.requests.CreateLanguageRequest;
+import kodlama.io.Devs.business.requests.DeleteLanguageRequest;
+import kodlama.io.Devs.business.requests.UptadeLanguageRequest;
+import kodlama.io.Devs.business.responses.GetAllLanguagesResponse;
+import kodlama.io.Devs.business.responses.GetWithIdLanguageResponse;
+import kodlama.io.Devs.dataAccess.abstracts.LanguageRepository;
+import kodlama.io.Devs.entities.concretes.Language;
+
+
+
+@Service
+public class LanguageManager implements LanguageService {
+
+	private LanguageRepository languageRepository;
+
+	@Override
+	public List<GetAllLanguagesResponse> getAll() {
+		List<Language> languages = languageRepository.findAll();
+		List<GetAllLanguagesResponse> getAllLanguagesResponses = new ArrayList<GetAllLanguagesResponse>();
+		
+		for (Language language : languages) {
+			GetAllLanguagesResponse languagesResponse = new GetAllLanguagesResponse();
+			
+			languagesResponse.setId(language.getId());
+			languagesResponse.setName(language.getName());
+			languagesResponse.setProgram(language.getProgram());
+			
+			getAllLanguagesResponses.add(languagesResponse);
+			
+		}
+		
+		return getAllLanguagesResponses;
+	}
+
+	@Override
+	public Language add(CreateLanguageRequest createLanguageRequest) throws Exception {
+		Language language = new Language();
+		language.setName(createLanguageRequest.getName());
+		language.setProgram(createLanguageRequest.getProgram());
+		
+		return language;
+	}
+
+	@Override
+	public void delete(DeleteLanguageRequest deleteLanguageRequest) {
+		Language language = new Language();
+		language.setName(deleteLanguageRequest.getName());
+		language.setProgram(deleteLanguageRequest.getProgram());		
+		
+	}
+
+	@Override
+	public void uptade(UptadeLanguageRequest uptadeLanguageRequest) {
+		
+		
+	}
+
+	@Override
+	public Language getWithId(GetWithIdLanguageResponse getWithIdLanguageResponse) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean IsNameBlankAndEmpty(Language language) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean IsNameExist(Language language) {
+		// TODO Auto-generated method stub
+		return false;
+	}		
+	
+    
+
+}

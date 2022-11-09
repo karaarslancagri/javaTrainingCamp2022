@@ -1,0 +1,12 @@
+package kodlama.io.Devs.business.abstracts;
+
+import java.util.List;
+
+import kodlama.io.Devs.business.requests.subTechnology.CreateSubTechnologyRequest;
+
+public interface SubTechnologyService {
+
+	void add(CreateSubTechnologyRequest createSubTechnologyRequest);
+	
+	
+}

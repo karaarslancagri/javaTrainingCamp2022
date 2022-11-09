@@ -1,0 +1,9 @@
+package kodlama.io.Devs.business.abstracts;
+
+import java.util.List;
+
+public interface SubTechnologyService {
+	
+	
+
+}
